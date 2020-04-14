@@ -76,15 +76,15 @@ void CreateTriangle()
 		0.0f, 1.0f, 0.0f
 	};
 
-	glGenVertexArrays(1, &VAO);
+	glGenVertexArrays(1, &VAO);//guarda en un objeto todos los buffers activos, esto definira un mesh
 	glBindVertexArray(VAO);
 
 	glGenBuffers(1, &IBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);//guarda la memoria del vector en la tarjeta de video
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);//guarda la memoria del vector en la tarjeta de video
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -175,10 +175,7 @@ int main()
 	// OpenGL version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	// Core Profile
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	// Allow Forward Compatbility
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
 
 	// Create the window
 	GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Test Window", NULL, NULL);
@@ -196,8 +193,6 @@ int main()
 	// Set context for GLEW to use
 	glfwMakeContextCurrent(mainWindow);
 
-	// Allow modern extension features
-	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK)
 	{
@@ -289,11 +284,10 @@ int main()
 }
 
 
-//glDrawArrays(GL_LINE_LOOP, 0, 3);
 
 // cambiar color
 // cambiar escala
 // GL_LINE_STRIP ,GL_LINE_LOOP , GL_POINTS, GL_TRIANGLE_STRIP, GL_TRIANGLES
-// hacer un dibujo nuevo
+// hacer que la piramide este derecha
 
 
