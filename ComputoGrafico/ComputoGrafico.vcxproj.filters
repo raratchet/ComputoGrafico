@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="BCE">
+      <UniqueIdentifier>{0039e17c-9ad2-445f-9baf-755fc38d0879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2317a8ee-ecfa-4357-ba84-532eb69df2b7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BCE\GameState.cpp">
+      <Filter>BCE</Filter>
+    </ClCompile>
+    <ClCompile Include="BCE\GameStateManager.cpp">
+      <Filter>BCE</Filter>
+    </ClCompile>
+    <ClCompile Include="BCE\Platform.cpp">
+      <Filter>BCE</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BCE\Mesh.cpp">
+      <Filter>BCE</Filter>
+    </ClCompile>
+    <ClCompile Include="BCE\Shader.cpp">
+      <Filter>BCE</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BCE\Platform.h">
+      <Filter>BCE</Filter>
+    </ClInclude>
+    <ClInclude Include="BCE\GameState.h">
+      <Filter>BCE</Filter>
+    </ClInclude>
+    <ClInclude Include="BCE\GameStateManager.h">
+      <Filter>BCE</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BCE\Mesh.h">
+      <Filter>BCE</Filter>
+    </ClInclude>
+    <ClInclude Include="BCE\Shader.h">
+      <Filter>BCE</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
