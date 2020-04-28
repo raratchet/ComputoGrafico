@@ -1,18 +1,30 @@
 #include "GameStateManager.h"
 #include <iostream>
+GameStateManager* GameStateManager::ptr;
 
 GameStateManager::GameStateManager()
 {
-	platform = new Platform("BlackCable");
+	platform = Platform::GetPtr();
 }
 
 GameStateManager::~GameStateManager()
 {
 }
-
+GameStateManager* GameStateManager::getPtr()
+{
+	if (ptr == nullptr)
+	{
+		ptr = new GameStateManager();
+	}
+	else
+	{
+		return ptr;
+	}
+}
 void GameStateManager::GameLoop()
 {
-	while (true)
+	//Para que el juego se cierre al poner ESC
+	while (!platform->shouldWindowClose())
 	{
 		try
 		{
@@ -23,7 +35,7 @@ void GameStateManager::GameLoop()
 			{
 				break;
 			}
-			platform->CheckEvent(state, &GameState::Input);
+			platform->CheckEvent(state, &GameState::Input, &GameState::MouseInput);
 			state->Update();
 			state->Draw();
 
@@ -38,7 +50,7 @@ void GameStateManager::GameLoop()
 
 void GameStateManager::SetState(GameState* state)
 {
-	state->Init(platform, this);
+	state->Init();
 	states.push(state);
 }
 
