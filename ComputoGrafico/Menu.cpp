@@ -61,6 +61,16 @@ void Menu::Draw()
 	model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	meshList[0]->RenderMesh();
+
+
+	shaderManager->Activate("default");
+	shaderManager->draw();
+	uniformModel = shaderManager->GetModelLocation();
+	model = glm::translate(model, glm::vec3(10.0f, 0.0f, -8.5f));
+	model = glm::scale(model, glm::vec3(0.7f, 0.4f, 1.0f));
+	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+	meshList[0]->RenderMesh();
+
 	platform->RenderPresent();
 }
 bool Menu::MouseInput(int x, int y, bool leftbutton)

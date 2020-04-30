@@ -67,7 +67,6 @@ void ShaderManager::draw()
 		currentShader->UseShader();
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera->calculateViewMatrix()));
-		//glUniform3f(uniformEyePosition, camera->getCameraPosition().x, camera->getCameraPosition().y, camera->getCameraPosition().z);
 	}
 }
 void ShaderManager::initShader(Camera* camera)

@@ -42,7 +42,7 @@ void GameStateManager::GameLoop()
 		}
 		catch (...)
 		{
-			std::cout << "Critical error BlackCable is closing";
+			std::cout << "Critical error App is closing";
 			break;
 		}
 	}

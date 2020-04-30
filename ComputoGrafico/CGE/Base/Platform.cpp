@@ -114,7 +114,7 @@ Platform* Platform::GetPtr()
 {
 	if (ptr == nullptr)
 	{
-		ptr = new Platform("THE GAME", 1920, 1080);
+		ptr = new Platform("THE GAME", 800, 600);
 	}
 	else
 	{
