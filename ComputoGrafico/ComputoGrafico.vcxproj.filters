@@ -95,5 +95,11 @@
     <None Include="Assets\Shaders\OneColor.vert">
       <Filter>Assets\Shaders</Filter>
     </None>
+    <None Include="Assets\Shaders\gouraud-shader.frag">
+      <Filter>Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\gouraud-shader.vert">
+      <Filter>Assets\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

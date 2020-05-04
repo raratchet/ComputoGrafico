@@ -10,17 +10,16 @@ GameStateManager::GameStateManager()
 GameStateManager::~GameStateManager()
 {
 }
-GameStateManager* GameStateManager::getPtr()
+
+GameStateManager* GameStateManager::GetPtr()
 {
 	if (ptr == nullptr)
 	{
 		ptr = new GameStateManager();
 	}
-	else
-	{
-		return ptr;
-	}
+	return ptr;
 }
+
 void GameStateManager::GameLoop()
 {
 	//Para que el juego se cierre al poner ESC

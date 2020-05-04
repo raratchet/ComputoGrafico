@@ -86,7 +86,7 @@ void Camera::update()
 	front.y = 0;//sin(glm::radians(pitch));
 	front.z = sin(glm::radians(yaw));
 	front = glm::normalize(front);
-
+	
 	right = glm::normalize(glm::cross(front, worldUp));
 	up = glm::normalize(glm::cross(right, front));
 }

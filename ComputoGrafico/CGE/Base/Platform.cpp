@@ -116,10 +116,7 @@ Platform* Platform::GetPtr()
 	{
 		ptr = new Platform("THE GAME", 800, 600);
 	}
-	else
-	{
-		return ptr;
-	}
+	return ptr;
 }
 
 void  Platform::HandleKeys(GLFWwindow* window, int key, int code, int action, int mode)

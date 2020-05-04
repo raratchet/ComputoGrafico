@@ -149,6 +149,8 @@
   <ItemGroup>
     <None Include="Assets\Shaders\Default\default.frag" />
     <None Include="Assets\Shaders\Default\default.vert" />
+    <None Include="Assets\Shaders\gouraud-shader.frag" />
+    <None Include="Assets\Shaders\gouraud-shader.vert" />
     <None Include="Assets\Shaders\OneColor.frag" />
     <None Include="Assets\Shaders\OneColor.vert" />
   </ItemGroup>
