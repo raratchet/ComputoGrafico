@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include<iostream>
 #include <glm.hpp>
+#include <time.h>
 #include <gtc\matrix_transform.hpp>
 #include <gtc\type_ptr.hpp>
 
@@ -51,8 +52,14 @@ void Menu::Init()
 	shaderManager->initShader(&camera);
 	shaderManager->LoadShaders("OneColor", "Assets/Shaders/OneColor.vert", "Assets/Shaders/OneColor.frag");
 	shaderManager->LoadShaders("gouraud-shader", "Assets/Shaders/gouraud-shader.vert", "Assets/Shaders/gouraud-shader.frag");
+	shaderManager->LoadShaders("phong-shader", "Assets/Shaders/phong-shader.vert", "Assets/Shaders/phong-shader.frag");
+	shaderManager->LoadShaders("toon-shader", "Assets/Shaders/toon-shader.vert", "Assets/Shaders/toon-shader.frag");
+		
 	LoadModels();
-	
+	weapon = new Model();
+	weapon->LoadModel("Assets/Models/pina_pose.obj");
+	srand(time(NULL));
+	angle = 0;
 }
 
 void Menu::LoadModels()
@@ -91,7 +98,7 @@ void Menu::LoadShaders()
 void Menu::Draw()
 {
 	platform->RenderClear();
-	shaderManager->Activate("gouraud-shader");
+	shaderManager->Activate("OneColor");
 	shaderManager->draw();
 	glm::mat4 model(1);
 	GLint uniformModel = shaderManager->GetModelLocation();
@@ -100,16 +107,30 @@ void Menu::Draw()
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	meshList[0]->RenderMesh();
 
-
-	shaderManager->Activate("default");
+	
+	shaderManager->Activate("toon-shader");
 	shaderManager->draw();
 	uniformModel = shaderManager->GetModelLocation();
+	GLint color1 = shaderManager->GetColor1();
+	GLint color2 = shaderManager->GetColor2();
 	model = glm::translate(model, glm::vec3(10.0f, 0.0f, -8.5f));
 	model = glm::scale(model, glm::vec3(0.7f, 0.4f, 1.0f));
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+	glUniform3f(color1, 0, angle, 0.0f );
+	angle = angle + 1.0f;
+	glUniform3f(color2, 0.0f, 0.0f, 1.0f);
+
 	meshList[0]->RenderMesh();
 
+	transform.SetTranslation(0.0f, 0.0f, 0.0f);
+	transform.SetScale(1.1f, 1.1f, 1.11f);
+	transform.SetRotation(0, 0, 0);
+	weapon->SetTransform(&transform);
+	weapon->Draw();
+
 	platform->RenderPresent();
+
+
 }
 bool Menu::MouseInput(int x, int y, bool leftbutton)
 {

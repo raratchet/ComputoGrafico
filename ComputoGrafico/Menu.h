@@ -4,6 +4,7 @@
 #include "CGE/Graphic/Mesh.h"
 #include "CGE/Graphic/Shader.h"
 #include "CGE/Base/ShaderManager.h"
+#include "CGE/Graphic/Model.h"
 #include<vector>
 class Menu : public GameState
 {
@@ -14,6 +15,9 @@ private:
 	std::vector<Mesh*> meshList;
 	ShaderManager* shaderManager;
 	Camera camera;
+	float angle;
+	Model* weapon;
+	Transform transform;
 public:
 	Menu();
 	~Menu();

@@ -76,12 +76,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\ExternalLibs\glfw-3.3.bin.WIN32\include;..\ExternalLibs\glew-2.1.0\include;..\ExternalLibs\glm\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\ExternalLibs\glfw-3.3.bin.WIN32\include;..\ExternalLibs\glew-2.1.0\include;..\ExternalLibs\glm\glm;..\ExternalLibs\Assimp\include;C:\Dev2020\ComputoGrafico\ExternalLibs\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>..\ExternalLibs\glfw-3.3.bin.WIN32\lib-vc2019;..\ExternalLibs\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glew32.lib;Opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\ExternalLibs\glfw-3.3.bin.WIN32\lib-vc2019;..\ExternalLibs\glew-2.1.0\lib\Release\Win32;..\ExternalLibs\Assimp\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;Opengl32.lib;assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,8 +130,11 @@
     <ClCompile Include="CGE\Base\GameStateManager.cpp" />
     <ClCompile Include="CGE\Base\Platform.cpp" />
     <ClCompile Include="CGE\Base\ShaderManager.cpp" />
+    <ClCompile Include="CGE\Base\Transform.cpp" />
+    <ClCompile Include="CGE\Graphic\BaseModel.cpp" />
     <ClCompile Include="CGE\Graphic\Camera.cpp" />
     <ClCompile Include="CGE\Graphic\Mesh.cpp" />
+    <ClCompile Include="CGE\Graphic\Model.cpp" />
     <ClCompile Include="CGE\Graphic\Shader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -141,8 +144,11 @@
     <ClInclude Include="CGE\Base\GameStateManager.h" />
     <ClInclude Include="CGE\Base\Platform.h" />
     <ClInclude Include="CGE\Base\ShaderManager.h" />
+    <ClInclude Include="CGE\Base\Transform.h" />
+    <ClInclude Include="CGE\Graphic\BaseModel.h" />
     <ClInclude Include="CGE\Graphic\Camera.h" />
     <ClInclude Include="CGE\Graphic\Mesh.h" />
+    <ClInclude Include="CGE\Graphic\Model.h" />
     <ClInclude Include="CGE\Graphic\Shader.h" />
     <ClInclude Include="Menu.h" />
   </ItemGroup>
@@ -153,6 +159,10 @@
     <None Include="Assets\Shaders\gouraud-shader.vert" />
     <None Include="Assets\Shaders\OneColor.frag" />
     <None Include="Assets\Shaders\OneColor.vert" />
+    <None Include="Assets\Shaders\phong-shader.frag" />
+    <None Include="Assets\Shaders\phong-shader.vert" />
+    <None Include="Assets\Shaders\toon-shader.frag" />
+    <None Include="Assets\Shaders\toon-shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

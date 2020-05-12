@@ -20,6 +20,8 @@ public:
 	GLint GetProjectionLocation();
 	GLint GetSpecularIntensityLocation();
 	GLint GetShininessLocation();
+	GLint GetColor1();
+	GLint GetColor2();
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix();
 	void Activate(const std::string& path);
@@ -31,7 +33,7 @@ private:
 	Camera* camera;
 	glm::mat4 projection;
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
-
+	GLuint color1, color2;
 	GLuint  uniformEyePosition = 0,
 		uniformAmbientIntensity = 0, uniformAmbientColour = 0, uniformDirection = 0, uniformDiffuseIntensity = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0,
