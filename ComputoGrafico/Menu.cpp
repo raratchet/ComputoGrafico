@@ -58,6 +58,9 @@ void Menu::Init()
 	LoadModels();
 	weapon = new Model();
 	weapon->LoadModel("Assets/Models/pina_pose.obj");
+	weapon->AddTexture("pina.png");
+	weapon->AddTexture("pina_normal.png");
+
 	srand(time(NULL));
 	angle = 0;
 }
@@ -108,7 +111,7 @@ void Menu::Draw()
 	meshList[0]->RenderMesh();
 
 	
-	shaderManager->Activate("toon-shader");
+	shaderManager->Activate("OneColor");
 	shaderManager->draw();
 	uniformModel = shaderManager->GetModelLocation();
 	GLint color1 = shaderManager->GetColor1();
@@ -122,6 +125,8 @@ void Menu::Draw()
 
 	meshList[0]->RenderMesh();
 
+	shaderManager->Activate("toon-shader");
+	shaderManager->draw();
 	transform.SetTranslation(0.0f, 0.0f, 0.0f);
 	transform.SetScale(1.1f, 1.1f, 1.11f);
 	transform.SetRotation(0, 0, 0);

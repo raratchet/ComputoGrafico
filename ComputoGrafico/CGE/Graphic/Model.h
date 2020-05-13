@@ -8,7 +8,7 @@
 #include <assimp\postprocess.h>
 
 #include "Mesh.h"
-//#include "Texture.h"
+#include "Texture.h"
 #include "../Base/Transform.h"
 #include "../Base/ShaderManager.h"
 #include "BaseModel.h"
@@ -32,8 +32,8 @@ private:
 	void LoadMaterials(const aiScene *scene);
 
 	std::vector<Mesh*> meshList;
-//	std::vector<Texture*> textureList;
-//	std::vector<Texture*> textureNormalList;
+	std::vector<Texture*> textureList;
+	std::vector<Texture*> textureNormalList;
 	std::vector<unsigned int> meshToTex;
 		
 };

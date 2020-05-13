@@ -1,14 +1,15 @@
 #version 330
 
+in vec2 TexCoord;
 in vec3 FragPos;
 in vec3 Normal1;
 out vec4 colour;
 
+uniform sampler2D tex;
 
 void main()
 {
-
-	const vec3 lightDir = vec3( .61 , .61, .61 );
+	vec3 lightDir = vec3(1.0,0.95,0.95);
 	float intensity;
 	vec4 color;
 	intensity = dot(lightDir,normalize(Normal1));
@@ -21,6 +22,5 @@ void main()
 		color = vec4(0.4,0.2,0.2,1.0);
 	else
 		color = vec4(0.2,0.1,0.1,1.0);
-	colour = color;
-	
+	colour = texture(tex, TexCoord)*color;
 }

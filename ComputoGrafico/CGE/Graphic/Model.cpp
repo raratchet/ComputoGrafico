@@ -24,10 +24,10 @@
 
 			for (size_t i = 0; i < meshList.size(); i++)
 			{
-			/*	for (size_t j = 0; j < textureList.size(); j++)
+				for (size_t j = 0; j < textureList.size(); j++)
 				{
 					textureList[j]->UseTexture(GL_TEXTURE0+j);
-				}*/
+				}
 				meshList[i]->RenderMesh();
 			}
 		}
@@ -112,11 +112,7 @@
 					}
 				}
 
-				//if (!textureList[i])
-				//{
-				//	textureList[i] = new Texture("Assets/Textures/plain.png");
-				//	textureList[i]->LoadTextureA();
-				//}
+	
 			}
 		}
 
@@ -124,20 +120,20 @@
 		void Model::AddTexture(std::string path)
 		{
 			
-			//int idx = std::string(path).rfind("\\");
-			//std::string filename = std::string(path).substr(idx + 1);
+			int idx = std::string(path).rfind("\\");
+			std::string filename = std::string(path).substr(idx + 1);
 
-			//std::string texPath = std::string("Assets/Textures/") + filename;
-			//Texture* texture;
-			//texture = new Texture(texPath.c_str());
+			std::string texPath = std::string("Assets/Textures/") + filename;
+			Texture* texture;
+			texture = new Texture(texPath.c_str());
 
-			//if (!texture->LoadTextureA())
-			//{
-			//	printf("Failed to load texture at: %s\n", texPath);
-			//	delete texture;
-			//	texture = nullptr;
-			//}
-			//textureList.push_back(texture);
+			if (!texture->LoadTextureA())
+			{
+				printf("Failed to load texture at: %s\n", texPath);
+				delete texture;
+				texture = nullptr;
+			}
+			textureList.push_back(texture);
 		}
 
 		void Model::ClearModel()
@@ -151,14 +147,14 @@
 				}
 			}
 
-			/*for (size_t i = 0; i < textureList.size(); i++)
+			for (size_t i = 0; i < textureList.size(); i++)
 			{
 				if (textureList[i])
 				{
 					delete textureList[i];
 					textureList[i] = nullptr;
 				}
-			}*/
+			}
 		}
 
 		Model::~Model()
