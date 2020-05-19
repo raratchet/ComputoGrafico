@@ -13,7 +13,7 @@
 			Texture();
 			Texture(std::string fileLoc);
 			bool LoadTexture();
-			bool LoadTextureA();
+			bool LoadTextureA();//http://www.opengl-tutorial.org/es/beginners-tutorials/tutorial-5-a-textured-cube/
 			void UseTexture(unsigned int i = 0);
 			void ClearTexture();
 			~Texture();

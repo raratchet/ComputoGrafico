@@ -1,20 +1,23 @@
 #version 330
 
+in vec2 TexCoord;
 in vec3 FragPos;
-in vec3 Normal1;
 out vec4 colour;
-
+in mat3 TBN;	
+in vec3 norm1;
+uniform sampler2D tex;
+uniform sampler2D normalMap;  
 
 vec3 ADSLightModel( in vec3 myNormal, in vec3 myPosition )
 {
-	const vec3 myLightPosition = vec3( 0.0 , 0.5, 0.0 );
-	const vec3 myLightAmbient = vec3( 0.2, 0.2, 0.2 );
+	const vec3 myLightPosition = vec3( 0.0 , 0.0, -10.0 );
+	const vec3 myLightAmbient = vec3( 0.42, 0.42, 0.42 );
 	const vec3 myLightDiffuse = vec3( 1.0 , 1.0 , 1.0 );
 	const vec3 myLightSpecular = vec3( 1.0 , 1.0 , 1.0 );
-	const vec3 myMaterialAmbient = vec3( 1.0 , 0.5, 0.0 );
-	const vec3 myMaterialDiffuse = vec3( 1.0 , 0.5, 0.0 );
-	const vec3 myMaterialSpecular = vec3( 0.6, 0.6, 0.6 );
-	const float myMaterialShininess = 10.1f;
+	const vec3 myMaterialAmbient = vec3( 0.5 , 0.5, 0.5 );
+	const vec3 myMaterialDiffuse = vec3( 0.5 , 0.5, 0.5 );
+	const vec3 myMaterialSpecular = vec3( 0.92, 0.92, 0.92 );
+	const float myMaterialShininess = 0.01;
 	//normal, light, view, and light reflection vectors
 	vec3 norm = normalize( myNormal );
 	vec3 lightv = normalize( myLightPosition - myPosition);
@@ -38,7 +41,11 @@ vec3 ADSLightModel( in vec3 myNormal, in vec3 myPosition )
 void main()
 {
 
-	vec4 finalColour = vec4(ADSLightModel(Normal1,FragPos),1.0f);
+    vec3 Normal = texture(normalMap, TexCoord).rgb;
+    Normal = normalize(Normal*2-1);  
+	Normal = normalize(TBN * Normal); 
+
+	vec4 finalColour = vec4(ADSLightModel(Normal,FragPos),1.0f);
 	
-	colour =  finalColour;
+	colour =  texture(tex, TexCoord)*finalColour;
 }

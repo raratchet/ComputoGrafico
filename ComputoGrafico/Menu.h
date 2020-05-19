@@ -13,6 +13,9 @@ private:
 	GameStateManager* manager;
 
 	std::vector<Mesh*> meshList;
+
+	Texture* texture;
+	Texture* textureNormal;
 	ShaderManager* shaderManager;
 	Camera camera;
 	float angle;
