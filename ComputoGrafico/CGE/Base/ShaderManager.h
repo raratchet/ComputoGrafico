@@ -25,6 +25,14 @@ public:
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix();
 	void Activate(const std::string& path);
+
+	GLuint GetmainTex();
+	GLuint GetrTex();
+	GLuint GetgTex();
+	GLuint GetbTex();
+	GLuint GetblendTexture();
+	GLuint GetNormalTexture();
+
 private:
 	ShaderManager();
 	std::map<std::string, Shader> shaderList;
@@ -38,6 +46,13 @@ private:
 		uniformAmbientIntensity = 0, uniformAmbientColour = 0, uniformDirection = 0, uniformDiffuseIntensity = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0,
 		myMaterialAmbient = 0, myLightAmbient = 0;
+
+	GLuint mainTex;
+	GLuint rTex;
+	GLuint gTex;
+	GLuint bTex;
+	GLuint blendTexture;
+	GLuint normalTexture;
 
 };
 

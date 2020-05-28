@@ -65,6 +65,34 @@ glm::mat4 ShaderManager::GetProjectionMatrix()
 	return projection;
 }
 
+GLuint ShaderManager::GetmainTex()
+{
+	return mainTex;
+}
+GLuint ShaderManager::GetrTex()
+{
+	return rTex;
+}
+GLuint ShaderManager::GetgTex()
+{
+	return gTex;
+}
+GLuint ShaderManager::GetbTex()
+{
+	return bTex;
+}
+GLuint ShaderManager::GetblendTexture()
+{
+	return blendTexture;
+}
+
+GLuint ShaderManager::GetNormalTexture()
+{
+	return normalTexture;
+}
+
+
+
 GLint ShaderManager::GetShininessLocation()
 {
 	return uniformShininess;
@@ -100,5 +128,12 @@ void ShaderManager::Activate(const std::string& name)
 		uniformView = currentShader->GetViewLocation();
 		color1 = currentShader->GetColor1();
 		color2 = currentShader->GetColor2();
+
+		mainTex = currentShader->GetmainTex();
+		rTex = currentShader->GetrTex();
+		gTex = currentShader->GetgTex();
+		bTex = currentShader->GetbTex();
+		blendTexture = currentShader->GetblendTexture();
+		normalTexture = currentShader->GetNormalTexture();
 	}
 }

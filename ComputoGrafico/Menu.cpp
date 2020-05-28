@@ -78,36 +78,33 @@ void Menu::LoadModels()
 {
 	unsigned int indices[] = {
 				0,1,2,
-				2,3,0,
-				0,4,3,
-				4,7,3,
-				3,7,6,
-				6,3,2
+				1,2,3,
 	};
 
 	GLfloat vertices[] = {
-		// front
-		-1.0, -1.0,  1.0, 0.0f, 0.0f,		0.0f, 0.0f, 0.8f,1.0f, 0.0f, 0.0f,//0
-		1.0, -1.0,  1.0,1.0f, 0.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//1
-		1.0,  1.0,  1.0,1.0f, 1.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//2
-		-1.0,  1.0,  1.0,0.0f, 1.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//3
-		// back
-		-1.0, -1.0, -1.0,1.0f, 1.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//4
-		1.0, -1.0, -1.0,1.0f, 0.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//5
-		1.0,  1.0, -1.0,1.0f, 1.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//6
-		-1.0,  1.0, -1.0,0.0f, 1.0f,		0.7f, -0.7f, 0.0f,1.0f, 0.0f, 0.0f,//7
+		// floor
+		-1.0, -1.0,  -1.0, 0.0f, 0.0f,		0.0f, 0.0f, 0.8f,1.0f, 0.0f, 0.0f,//0
+		-1.0, -1.0,  1.0,0.0f, 1.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//1
+		1.0,  -1.0,  -1.0,1.0f, 0.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//2
+		1.0,  -1.0,  1.0,1.0f, 1.0f,		0.0f, 0.0f, 0.0f,1.0f, 0.0f, 0.0f,//3
 	};
-	calcAverageNormals(indices, 18, vertices, 88, 11, 5);
+	calcAverageNormals(indices, 6, vertices, 44, 11, 5);
 	Mesh *obj1 = new Mesh();
-	obj1->CreateMesh(vertices, indices, 88, 18, 11);
+	obj1->CreateMesh(vertices, indices, 44, 6, 11);
 	meshList.push_back(obj1);
 
-
-	texture = new Texture("Assets/Textures/brick.png");
-	texture->LoadTextureA();
-	textureNormal = new Texture("Assets/Textures/bricknormal.png");
-	textureNormal->LoadTextureA();
-
+	mainTexture = new Texture("Assets/Textures/MultiTexture/mainTexture.png");
+	mainTexture->LoadTexture();
+	rTexture = new Texture("Assets/Textures/MultiTexture/rTexture.png");
+	rTexture->LoadTexture();
+	gTexture = new Texture("Assets/Textures/MultiTexture/gTexture.png");
+	gTexture->LoadTexture();
+	bTexture = new Texture("Assets/Textures/MultiTexture/bTexture.png");
+	bTexture->LoadTexture();
+	blendTexture = new Texture("Assets/Textures/MultiTexture/blendTexture.png");
+	blendTexture->LoadTexture();
+	normalTexture = new Texture("Assets/Textures/MultiTexture/bricknormal.png");
+	normalTexture->LoadTexture();
 }
 void Menu::LoadShaders()
 {
@@ -123,27 +120,40 @@ void Menu::Draw()
 	shaderManager->draw();
 	glm::mat4 model(1);
 	GLint uniformModel = shaderManager->GetModelLocation();
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
-	model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
+	model = glm::translate(model, glm::vec3(0.0f, -10.0f, -2.5f));
+	model = glm::scale(model, glm::vec3(100.0f, 10.0f, 100.0f));
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-	texture->UseTexture(GL_TEXTURE0);
-	texture->UseTexture(GL_TEXTURE1);
-	meshList[0]->RenderMesh();
+	mainTexture->UseTexture(GL_TEXTURE0);
+	rTexture->UseTexture(GL_TEXTURE1);
+	gTexture->UseTexture(GL_TEXTURE2);
+	bTexture->UseTexture(GL_TEXTURE3);
+	blendTexture->UseTexture(GL_TEXTURE4);
+	normalTexture->UseTexture(GL_TEXTURE5);
 
-	
-	shaderManager->Activate("phong-shader");
-	shaderManager->draw();
-	uniformModel = shaderManager->GetModelLocation();
-	GLint color1 = shaderManager->GetColor1();
-	GLint color2 = shaderManager->GetColor2();
-	model = glm::translate(model, glm::vec3(10.0f, 0.0f, -8.5f));
-	model = glm::scale(model, glm::vec3(0.7f, 0.4f, 1.0f));
-	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-	glUniform3f(color1, 0, angle, 0.0f );
-	angle = angle + 1.0f;
-	glUniform3f(color2, 0.0f, 0.0f, 1.0f);
+	glUniform1i(shaderManager->GetmainTex(), 0);
+	glUniform1i(shaderManager->GetrTex(), 1);
+	glUniform1i(shaderManager->GetgTex(), 2);
+	glUniform1i(shaderManager->GetbTex(), 3);
+	glUniform1i(shaderManager->GetblendTexture(), 4);
+	glUniform1i(shaderManager->GetNormalTexture(), 5);
+
 
 	meshList[0]->RenderMesh();
+
+	//
+	//shaderManager->Activate("phong-shader");
+	//shaderManager->draw();
+	//uniformModel = shaderManager->GetModelLocation();
+	//GLint color1 = shaderManager->GetColor1();
+	//GLint color2 = shaderManager->GetColor2();
+	//model = glm::translate(model, glm::vec3(10.0f, 0.0f, -8.5f));
+	//model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+	//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+	//glUniform3f(color1, 0, angle, 0.0f );
+	//angle = angle + 1.0f;
+	//glUniform3f(color2, 0.0f, 0.0f, 1.0f);
+
+	//meshList[0]->RenderMesh();
 
 	shaderManager->Activate("phong-shader");
 	shaderManager->draw();

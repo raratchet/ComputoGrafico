@@ -16,8 +16,13 @@ private:
 
 	std::vector<Mesh*> meshList;
 
-	Texture* texture;
-	Texture* textureNormal;
+	Texture* mainTexture;
+	Texture* rTexture;
+	Texture* gTexture;
+	Texture* bTexture;
+	Texture* blendTexture;
+	Texture* normalTexture;
+
 	ShaderManager* shaderManager;
 	Camera camera;
 	float angle;
