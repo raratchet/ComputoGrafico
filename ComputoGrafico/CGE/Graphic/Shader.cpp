@@ -84,6 +84,13 @@ void Shader::CompileShader(const char* vertexCode, const char* fragmentCode)
 	color1 = glGetUniformLocation(shaderID, "color1");
 	color2 = glGetUniformLocation(shaderID, "color2");
 	myLightPosition = glGetUniformLocation(shaderID, "myLightPosition");
+
+	mainTex = glGetUniformLocation(shaderID, "mainTex");
+	rTex = glGetUniformLocation(shaderID, "rTex");
+	gTex = glGetUniformLocation(shaderID, "gTex");
+	bTex = glGetUniformLocation(shaderID, "bTex");
+	blendTexture = glGetUniformLocation(shaderID, "blendTexture");
+	normalTexture = glGetUniformLocation(shaderID, "normalMap");
 }
 
 GLuint Shader::GetProjectionLocation()
@@ -104,9 +111,36 @@ GLuint Shader::GetColor1()
 	return color1;
 }
 
+
+GLuint Shader::GetNormalTexture()
+{
+	return normalTexture;
+}
+
 GLuint Shader::GetColor2()
 {
 	return color2;
+}
+
+GLuint Shader::GetmainTex()
+{
+	return mainTex;
+}
+GLuint Shader::GetrTex()
+{
+	return rTex;
+}
+GLuint Shader::GetgTex()
+{
+	return gTex;
+}
+GLuint Shader::GetbTex()
+{
+	return bTex;
+}
+GLuint Shader::GetblendTexture()
+{
+	return blendTexture;
 }
 
 void Shader::UseShader()

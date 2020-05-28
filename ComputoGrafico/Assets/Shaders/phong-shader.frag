@@ -5,7 +5,11 @@ in vec3 FragPos;
 out vec4 colour;
 in mat3 TBN;	
 in vec3 norm1;
-uniform sampler2D tex;
+uniform sampler2D mainTex;
+uniform sampler2D rTex;
+uniform sampler2D gTex;
+uniform sampler2D bTex;
+uniform sampler2D blendTexture;
 uniform sampler2D normalMap;  
 
 vec3 ADSLightModel( in vec3 myNormal, in vec3 myPosition )
@@ -47,5 +51,14 @@ void main()
 
 	vec4 finalColour = vec4(ADSLightModel(Normal,FragPos),1.0f);
 	
-	colour =  texture(tex, TexCoord)*finalColour;
+
+	vec4 blendColor =  texture(blendTexture, TexCoord);
+	float mainTexture = 1- (blendColor.r+blendColor.g+blendColor.b);
+	vec4 mainTextureColor = texture(mainTex,TexCoord)*mainTexture;
+	vec4 rTexColor = texture(rTex,TexCoord)*blendColor.r;
+	vec4 gTexColor = texture(gTex,TexCoord)*blendColor.g;
+	vec4 bTexColor = texture(bTex,TexCoord)*blendColor.b;
+
+	vec4 finalTextureColor = mainTextureColor+rTexColor+gTexColor+bTexColor;
+	colour =  finalTextureColor*finalColour;
 }

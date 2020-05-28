@@ -22,6 +22,13 @@ public:
 	GLuint GetViewLocation();
 	GLuint GetColor1();
 	GLuint GetColor2();
+	GLuint GetNormalTexture();
+
+	GLuint GetmainTex();
+	GLuint GetrTex();
+	GLuint GetgTex();
+	GLuint GetbTex();
+	GLuint GetblendTexture();
 
 	void UseShader();
 	void ClearShader();
@@ -32,6 +39,12 @@ private:
 	GLuint shaderID, uniformProjection, uniformModel, uniformView;
 	GLuint color1, color2;
 	GLuint myLightPosition;
+	GLuint mainTex;
+	GLuint rTex;
+	GLuint gTex;
+	GLuint bTex;
+	GLuint blendTexture;
+	GLuint normalTexture;
 
 	void CompileShader(const char* vertexCode, const char* fragmentCode);
 	void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);
